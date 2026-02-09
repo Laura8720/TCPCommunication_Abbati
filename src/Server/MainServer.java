@@ -12,6 +12,8 @@ public class MainServer {
             System.out.println("SERVER: in attesa di richieste dei clienti");
             Socket clientSocket = server.accept();
             System.out.println("SERVER: il client si è connesso");
+            clientSocket.close(); //chiusura data socket
+            server.close();
         } catch (IOException e) {
             System.err.println("La porta non è disponibilr," +
                     "errore nella creazione del connection socket");
