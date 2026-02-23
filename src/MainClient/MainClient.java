@@ -13,9 +13,10 @@ public class MainClient {
             System.out.println("CLIENT: il client si è connesso al server"); //3wayhandshake
             OutputStream outputStream = socket.getOutputStream();
             PrintWriter pw = new PrintWriter(outputStream);
-            pw.print("Ciao server!");
+            pw.println("Ciao server!");
             pw.flush();
             System.out.println("CLIENT: il client ha inviato un messaggio");
+
         } catch (IOException e) {
             System.err.println("Errore nella connessione con il server");
         }

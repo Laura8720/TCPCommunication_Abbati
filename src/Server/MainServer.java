@@ -21,9 +21,10 @@ public class MainServer {
             InputStream inputStream = clientSocket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String messaggio = br.readLine();
+
+            //scrittura
             System.out.println("SERVER: il client " + clientSocket
                     + "ha scritto il messaggio " + messaggio);
-            //scrittura
 
             //chiusura
             clientSocket.close(); //chiusura data socket
