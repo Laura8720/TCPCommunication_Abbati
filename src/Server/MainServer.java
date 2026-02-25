@@ -1,11 +1,9 @@
 package Server;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
-import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class MainServer {
     public static void main(String[] args) {
@@ -17,14 +15,32 @@ public class MainServer {
             System.out.println("SERVER: il client si è connesso");
             //comunicazione
 
-            //lettura
-            InputStream inputStream = clientSocket.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            //istanzio il reader e il writer
+            PrintWriter pw = new PrintWriter(clientSocket.getOutputStream(), false);
+            BufferedReader br = new BufferedReader(new InputStreamReader((clientSocket.getInputStream())));
             String messaggio = br.readLine();
 
             //scrittura
             System.out.println("SERVER: il client " + clientSocket
                     + "ha scritto il messaggio " + messaggio);
+
+            //ciclo while
+            String mex = "";
+            while (!mex.equals("esci")){
+                //importo lo scanner per leggere il messaggio che ha scritto l'utente
+                Scanner sc = new Scanner(System.in);
+                System.out.print("Scrivi messaggio: ");
+                mex = sc.nextLine();
+
+                //con il writer mando il messaggio al SERVER
+                pw.println(mex);
+                pw.flush();
+
+                //messaggio di risposta ricevuto dal SERVER
+                String messaggio2 = br.readLine();
+                System.out.println("CLIENT: il messaggio ricevuto dal server è: " +
+                        messaggio2);
+            }
 
             //chiusura
             clientSocket.close(); //chiusura data socket
